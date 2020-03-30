@@ -4,10 +4,11 @@ float x2;
 float y1;
 float y2;
 String[] lines;
+
+
 void setup(){
   size( 1920, 1080, P2D );
   strokeWeight(2);
-  lines = loadStrings("newCaptures.txt");
   
 }
 void draw(){
