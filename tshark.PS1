@@ -1,0 +1,1 @@
+C:\'Program Files'\Wireshark\tshark.exe -i 1 -a duration:10 | Out-File C:\Users\doyle\Documents\uni\soma3400\processingSketches\dump.txt
