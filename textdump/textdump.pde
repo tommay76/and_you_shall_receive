@@ -1,8 +1,9 @@
 import ddf.minim.*;
 import ddf.minim.ugens.*;
+import processing.sound.*;
 Minim minim;
 AudioOutput out;
-
+LowPass lowPass;
 class ToneInstrument implements Instrument
 {
   // create all variables that must be used througout the class
@@ -51,7 +52,7 @@ String[] lines;
 
 
 void setup(){
-  size( 1920, 1080, P2D );
+  fullScreen();
   strokeWeight(2);
   lines = loadStrings("newCaptures.txt");
   l = 0;
@@ -59,7 +60,6 @@ void setup(){
   minim = new Minim( this );
   out = minim.getLineOut( Minim.MONO, 2048 );
 
-  
 }
 void draw(){
   background(0);
@@ -68,7 +68,10 @@ void draw(){
   t++;
   parametricLinesExperiment(t);
  // if (t%int(map(mouseY,0,1080,75,2))==0)out.playNote( 0,0.1,map(mouseX,0,1920,100,2000) );
-  if (t%2==0)out.playNote( 0,0.01,map(mouseX,0,1920,100,2000)* random(0.95,1.05));
+  if (t%2==0){
+    out.playNote( 0,0.01,map(mouseX,0,1920,100,2000)* random(0.95,1.05));
+
+  }
 
 }
 void parametricLinesExperiment(int t){
