@@ -37,16 +37,16 @@ public class Path {
     if (counter % 2==0)out.playNote( 0,0.01,map(outerIP[0]+outerIP[1],0,1920+1080,100,2000)* random(0.95,1.05));
     if (timeToLive<1)return;
     float pathLength = setUpMatrix();
-    fill(125,75,100);
-    textSize(30);
+    fill(140,255,255,255);
+    //textSize(30);
     line(0,0,0,pathLength);
-    if (outgoing)fill(275,75,100);
+    if (outgoing)fill(300,255,255,255);
     //println("time to live"+timeToLive+", length = "+message.length());
     float letters = min (50, message.length());
     for (int i = 0; i <timeToLive; i ++){
       if (growing){
         if (outgoing){
-          fill(50,255,50);
+
           text(message.charAt((i+counter) %message.length()),
           sin((float)i/letters* pathLength)*sinMultiplyer,
           pathLength -(float)i/letters* pathLength);
