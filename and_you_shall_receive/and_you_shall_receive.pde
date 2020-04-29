@@ -7,7 +7,7 @@ int SPEED = 10;
 int randomNumber1;
 int randomNumber2;
 int randomNumber3;
-int randomColour;
+int colorRandom;
 void setup(){
    t = 0;
    //Collection Thread Setup
@@ -43,16 +43,16 @@ void setup(){
   randomNumber1 = (int)random(100,1500);
   randomNumber2 = (int)random(100,1500);
   randomNumber3 = (int)random(100,1500);
-  randomColour = (int)random(0,360);
+  colorRandom = (int)random(0,360);
   //size(1920,1080, P2D);
-  fullScreen();
+  fullScreen(2);
   colorMode(HSB);
   background(0);
 }
 
 void draw(){
   
-  background(0);
+  background(0,10);
   textSize(20);
   if (threadLive == 0){
     threadLive = 1;
@@ -69,13 +69,13 @@ void draw(){
     
     // update Blobs
     detectBlobs();
-  
+    contoursImage = opencv.getSnapshot();
     collectionThread = new MyThread();
     collectionThread.start();
     randomNumber1 = (int)random(100,500);
     randomNumber2 = (int)random(1,30);
     randomNumber3 = (int)random(1,30);
-    randomColour = (int)random(0,360);
+    colorRandom = (int)random(0,360);
   }
   // Load the new frame of our camera in to OpenCV
   // Mac:
@@ -139,7 +139,7 @@ void displayPaths(){
   
   for (int i = 0; i < amount; i ++){
     Path p = paths.get(i);
-    if (p != null)p.display();
+    p.display();
   }
 }
 void deletePaths(){
@@ -160,7 +160,7 @@ void parametricLinesExperiment(int t){
     //line(x1(t+i),y1(t+i),x2(t+i),y2(t+i));
     fill(255);
     text(allLines.charAt(i%allLines.length()),x1(t+i),y1(t+i));
-    fill(randomColour,80,255);
+    fill(random(0,360),90,100);
     text(allLines.charAt(i%allLines.length()),x2(t+i),y2(t+i));
   }
   

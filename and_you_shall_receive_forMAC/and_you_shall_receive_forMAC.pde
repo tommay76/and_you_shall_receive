@@ -24,7 +24,7 @@ void setup(){
   // DCapture is windows exlusive
   // You will also need to change line 37 in the draw function
 
-   cam = new Capture(this, 640, 480);
+   cam = new Capture(this, sizeX, sizeY);
    cam.start();   
   // ^^^^^^ USE THIS FOR MAC ^^^^^^^^^^
   // I dont know if it works, I dont own a mac :)
