@@ -44,11 +44,13 @@ void setup(){
   randomNumber3 = (int)random(100,1500);
   //size(1920,1080, P2D);
   fullScreen(2);
+  colorMode(HSB);
+  background(0);
 }
 
 void draw(){
   
-  background(0);
+  background(0,10);
   textSize(20);
   if (threadLive == 0){
     threadLive = 1;
