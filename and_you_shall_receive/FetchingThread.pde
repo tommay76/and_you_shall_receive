@@ -38,7 +38,7 @@ void executeCommand() throws IOException {
   // Getting the results
   powerShellProcess.getOutputStream().close();
   String line = null;
-  System.out.println("Standard Output:");
+  //System.out.println("Standard Output:");
   BufferedReader stdout = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
   inboundMessages  = 0;
   outboundMessages = 0;
@@ -50,7 +50,7 @@ void executeCommand() throws IOException {
   newPaths = new ArrayList<Path>(); 
   externalIPPositions = new Hashtable<String, int[]>();
   while ((line = stdout.readLine()) != null) {
-    println(line);
+    //println(line);
     //text(line,100,100);
     parseMessage(line);
     newAllLines =newAllLines+ line+ "\n";
@@ -58,14 +58,9 @@ void executeCommand() throws IOException {
     if (count >100) break;
   }
   stdout.close();
-  System.out.println("Standard Error:");
-  BufferedReader stderr = new BufferedReader(new InputStreamReader(
-    powerShellProcess.getErrorStream()));
-  while ((line = stderr.readLine()) != null) {
-   System.out.println(line);
-  }
-  stderr.close();
   System.out.println("Done");
   allLines = newAllLines;
   newAllLines = null;
+  paths = newPaths;
+
 }

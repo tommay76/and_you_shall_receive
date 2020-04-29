@@ -33,6 +33,8 @@ void setup(){
 }
 
 void draw(){
+  background(0);
+  textSize(40);
   if (threadLive == 0){
     threadLive = 1;
     collectionThread = new MyThread();
@@ -66,9 +68,10 @@ void draw(){
   
   // update Blobs
   detectBlobs();
-  image(src, 0, 0);
-  displayBlobs();
+  //image(src, 0, 0);
+  //displayBlobs();
   displayPaths();
+  deletePaths();
  
 }
 
@@ -76,7 +79,11 @@ void displayPaths(){
   for (Path p: paths){
     p.display();
   }
-  for (int i = paths.size(); i >=0; i --){
+}
+void deletePaths(){
+  if (paths.size() == 0)return;
+  
+  for (int i = paths.size()-1; i >=0; i --){
     Path p = paths.get (i);
     if (p.done()){
       paths.remove(i);

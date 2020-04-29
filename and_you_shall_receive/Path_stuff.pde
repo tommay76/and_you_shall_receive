@@ -1,6 +1,6 @@
 
 import java.util.*;
-
+int sinMultiplyer = 50;
 // Path is a sine wave that goes from an edge of the screen ( determined by outer IP) to a blob on screen.
 // One path per message.
 // Multiple paths to the same blob will look cool with the differently displaced sin waves
@@ -9,7 +9,7 @@ ArrayList<Path> paths;
 public class Path {
   int blobIndex;
   int[] outerIP;
-
+  int counter;
   String message;
   boolean outgoing;
   boolean growing;
@@ -20,7 +20,7 @@ public class Path {
   public Path(int b, int[] ip1, String m, boolean og){
     blobIndex = b;
     outerIP = ip1;
-
+    counter = 0;
     message = m;
     outgoing = og;
     growing = true;
@@ -28,31 +28,52 @@ public class Path {
     sineDisplacement = random(0, PI*2);
     x = 0;
     y = 0;
+    //println("NEW PATH CREATED");
+    //println(blobIndex +", Ip edge = "+ outerIP[0] + ""+outerIP[1]);
+    if (outgoing)println(message);
   }
   void display(){
+    counter ++;
     assert(timeToLive != 0);
     float pathLength = setUpMatrix();
-    
-    for (int i = 0; i <timeToLive; i ++){
+    fill(50,50,255);
+    textSize(30);
+    line(0,0,0,pathLength);
+    if (outgoing)fill(50,255,50);
+    //println("time to live"+timeToLive+", length = "+message.length());
+    for (int i = 0; i <timeToLive; i += 3){
       if (growing){
         if (outgoing){
-          text(message.charAt(i), 0,i/message.length()* pathLength);
+          fill(50,255,50);
+          text(message.charAt((i+counter) %message.length()),
+          sin((float)i/(float)message.length()* pathLength)*sinMultiplyer,
+          pathLength -(float)i/(float)message.length()* pathLength);
         }else {
-          text(message.charAt(i), 0,(1 - i/message.length())* pathLength);
+
+          text(message.charAt((i+counter) %message.length()), 
+          sin(1 - ((float)i/(float)message.length())* pathLength)*sinMultiplyer
+          ,1 - ((float)i/(float)message.length())* pathLength);
         }
       }else{
         if (outgoing){
-          text(message.charAt(message.length()-i), 0,message.length()-i/message.length()* pathLength);
+          text(message.charAt(message.length()-((i+counter) %message.length()) -1), 
+          sin((float)(message.length()-i -1)/(float)message.length()* pathLength)*sinMultiplyer
+          ,pathLength - (float)(message.length()-i -1)/(float)message.length()* pathLength);
         }else {
-          text(message.charAt(message.length()-i), 0,(1 - (message.length()-i)/message.length())* pathLength);
+          text(message.charAt(message.length()-((i+counter) %message.length()) -1),
+          sin(((float)(message.length()-i -1)/(float)message.length())* pathLength)*sinMultiplyer,
+          1 - ((float)(message.length()-i -1)/(float)message.length())* pathLength);
         }
       }
     }
-    if (timeToLive == message.length())  {
+    
+    if (timeToLive + 5 >= message.length())  {
       growing = false;
     }
-    if (growing) timeToLive ++;
-    else timeToLive --;
+    
+    if (growing) timeToLive += 15;
+    else timeToLive -=15;
+    
     popMatrix();
   }
   // Returns magnitude of line between edge of screen and blob 
@@ -67,8 +88,8 @@ public class Path {
         y = random(0, height);
       }
     }else {
-      x = (float)blob.getBoundingBox().getX();
-      y = (float)blob.getBoundingBox().getY();
+      x = (float)blob.getBoundingBox().getX() + blob.getBoundingBox().width/2;
+      y = (float)blob.getBoundingBox().getY() + blob.getBoundingBox().height/2;
     }
     float angle = atan2(x - outerIP[0], y - outerIP[1]);
     rotate(-angle);
@@ -89,6 +110,6 @@ public class Path {
   }
   //Check if path has finished and should be killed
   boolean done(){
-    return (timeToLive == 0) ?  true :  false; // fancy if statements <3
+    return (timeToLive + 5 < 1) ?  true :  false; // fancy if statements <3
   }
 }

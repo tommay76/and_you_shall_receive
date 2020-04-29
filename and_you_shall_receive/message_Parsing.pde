@@ -20,21 +20,26 @@ void parseMessage(String str){
       internalIPs++;
     }
     if (externalIPPositions.get(splitStr[4]) == null){
-      externalIPPositions.put(splitStr[2], getNewEdge());
+      externalIPPositions.put(splitStr[4], getNewEdge());
     }
+    println("outbound direct message");
+    //print("Internal pos:"+internalIPPositions.get(splitStr[2])[0]);
+    //print (" "+ externalIPPositions.get(splitStr[4]));
     newPaths.add( new Path(internalIPPositions.get(splitStr[2])[0],externalIPPositions.get(splitStr[4]), str, true));
   }else{
     inboundMessages++;
     if (externalIPPositions.get(splitStr[2]) == null){
       externalIPPositions.put(splitStr[2], getNewEdge());
     }
-    if (isLocal(splitStr[2])){
+    if (isLocal(splitStr[4])){
       if (internalIPPositions.get(splitStr[4]) == null){
         internalIPPositions.put(splitStr[4], new int[]{internalIPs});
         internalIPs++;
       }
+      println("Inbound direct message");
       newPaths.add( new Path(internalIPPositions.get(splitStr[4])[0],externalIPPositions.get(splitStr[2]), str, false));
     }else {
+      println("Inbound broadcast");
       newPaths.add( new Path(-1,externalIPPositions.get(splitStr[2]), str, false));
     }
   }
