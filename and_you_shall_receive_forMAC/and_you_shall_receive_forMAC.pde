@@ -1,6 +1,19 @@
-import processing.video.*;
+
+// Modified for Mac users
+// Main change is video
+// My surface had to use an external library since Processing.video captured whats essentially 
+// The depth camera, which doesnt look pretty and drops serious frames. I imagine macbooks can use Processing.video just fine.
+// Relevant Video changes are at line 33-34 and 67-72
+// Another Change is my powershell command.
+// I imagine that wireshark is reasonably straightforward to download, and will give access to the
+// TShark command via the terminal. I have not checked this however.
+// Lastly, you may have to try change your interface variable.
+// Opening wireshark will show all interfaces, simply choose an interface (or guess a number between 1 and 5) with traffic for results. 
+//
+
 int sizeX = 1920;
 int sizeY = 1080;
+String INTERFACE = "4";
 String ThreadDuration = "3";
 int t ;
 float delay;

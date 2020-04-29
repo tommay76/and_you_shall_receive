@@ -1,4 +1,4 @@
-
+import processing.video.*;
 import java.awt.image.BufferedImage;
 
 //
