@@ -34,13 +34,13 @@ public class Path {
   }
   void display(){
     counter ++;
-    if (counter % 2==0)out.playNote( 0,0.01,map(mouseX,0,1920,100,2000)* random(0.95,1.05));
+    if (counter % 2==0)out.playNote( 0,0.01,map(outerIP[0]+outerIP[1],0,1920+1080,100,2000)* random(0.95,1.05));
     if (timeToLive<1)return;
     float pathLength = setUpMatrix();
     fill(50,50,255);
     textSize(30);
     line(0,0,0,pathLength);
-    if (outgoing)fill(50,255,50);
+    if (outgoing)fill(150,255,150);
     //println("time to live"+timeToLive+", length = "+message.length());
     float letters = min (50, message.length());
     for (int i = 0; i <timeToLive; i ++){
@@ -73,8 +73,8 @@ public class Path {
       growing = false;
     }
     
-    if (growing) timeToLive += 1;
-    else timeToLive -=1;
+    if (growing) timeToLive += SPEED;
+    else timeToLive -=SPEED;
     
     popMatrix();
   }
@@ -112,6 +112,6 @@ public class Path {
   }
   //Check if path has finished and should be killed
   boolean done(){
-    return (timeToLive + 5 < 1) ?  true :  false; // fancy if statements <3
+    return (timeToLive  < 0) ?  true :  false; // fancy if statements <3
   }
 }

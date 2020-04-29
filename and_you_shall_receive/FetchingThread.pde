@@ -62,5 +62,6 @@ void executeCommand() throws IOException {
   allLines = newAllLines;
   newAllLines = null;
   paths = newPaths;
-
+  t = 0;
+  out.playNote( 0,0.5,300* random(0.95,1.05));
 }
