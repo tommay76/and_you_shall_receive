@@ -25,6 +25,9 @@ void setup(){
   
   // Blobs list
   blobList = new ArrayList<Blob>();
+  
+  //Paths
+  paths = new ArrayList<Path>();
   size(640,480, P2D);
   
 }
@@ -65,5 +68,18 @@ void draw(){
   detectBlobs();
   image(src, 0, 0);
   displayBlobs();
-  
+  displayPaths();
+ 
+}
+
+void displayPaths(){
+  for (Path p: paths){
+    p.display();
+  }
+  for (int i = paths.size(); i >=0; i --){
+    Path p = paths.get (i);
+    if (p.done()){
+      paths.remove(i);
+    }
+  }
 }

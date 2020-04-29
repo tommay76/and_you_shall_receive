@@ -5,6 +5,7 @@ import java.util.*;
 // One path per message.
 // Multiple paths to the same blob will look cool with the differently displaced sin waves
 ArrayList<Path> newPaths;
+ArrayList<Path> paths;
 public class Path {
   int blobIndex;
   int[] outerIP;
