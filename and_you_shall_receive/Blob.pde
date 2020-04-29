@@ -20,7 +20,7 @@ import java.io.BufferedOutputStream;
 ArrayList<Contour> contours;
 ArrayList<Contour> newBlobContours;
 ArrayList<Blob> blobList;
-
+int blobCount = 0;
 float contrast = 1.35;
 int brightness = 0;
 int threshold = 75;

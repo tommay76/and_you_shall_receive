@@ -30,7 +30,7 @@ void executeCommand() throws IOException {
 
   //String command = "powershell.exe  your command";
   //Getting the version
-  String command = "powershell.exe  C:\\'Program Files'\\Wireshark\\tshark.exe -i 1 -a duration:3";
+  String command = "powershell.exe  C:\\'Program Files'\\Wireshark\\tshark.exe -i 4 -a duration:3";
   
   // Executing the command
   Process powerShellProcess = Runtime.getRuntime().exec(command);

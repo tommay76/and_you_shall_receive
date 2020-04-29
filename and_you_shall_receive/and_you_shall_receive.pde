@@ -2,7 +2,6 @@ int sizeX = 640;
 int sizeY = 480;
 void setup(){
   
-   fullScreen();
    //Collection Thread Setup
    collectionThread = new MyThread();
    newAllLines= null;
@@ -26,7 +25,7 @@ void setup(){
   
   // Blobs list
   blobList = new ArrayList<Blob>();
-  size(sizeX,sizeY, P2D);
+  size(640,480, P2D);
   
 }
 
@@ -35,6 +34,7 @@ void draw(){
     threadLive = 1;
     collectionThread = new MyThread();
     collectionThread.start();
+  }
   // Load the new frame of our camera in to OpenCV
   // Mac:
   // Change this to whatever capture function returns a Pimage of current capture
