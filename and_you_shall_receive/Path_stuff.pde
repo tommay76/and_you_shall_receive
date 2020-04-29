@@ -34,45 +34,47 @@ public class Path {
   }
   void display(){
     counter ++;
-    assert(timeToLive != 0);
+    if (counter % 2==0)out.playNote( 0,0.01,map(mouseX,0,1920,100,2000)* random(0.95,1.05));
+    if (timeToLive<1)return;
     float pathLength = setUpMatrix();
     fill(50,50,255);
     textSize(30);
     line(0,0,0,pathLength);
     if (outgoing)fill(50,255,50);
     //println("time to live"+timeToLive+", length = "+message.length());
-    for (int i = 0; i <timeToLive; i += 3){
+    float letters = min (50, message.length());
+    for (int i = 0; i <timeToLive; i ++){
       if (growing){
         if (outgoing){
           fill(50,255,50);
           text(message.charAt((i+counter) %message.length()),
-          sin((float)i/(float)message.length()* pathLength)*sinMultiplyer,
-          pathLength -(float)i/(float)message.length()* pathLength);
+          sin((float)i/letters* pathLength)*sinMultiplyer,
+          pathLength -(float)i/letters* pathLength);
         }else {
 
           text(message.charAt((i+counter) %message.length()), 
-          sin(1 - ((float)i/(float)message.length())* pathLength)*sinMultiplyer
-          ,1 - ((float)i/(float)message.length())* pathLength);
+          sin(1 - ((float)i/letters)* pathLength)*sinMultiplyer
+          ,1 - ((float)i/letters)* pathLength);
         }
       }else{
         if (outgoing){
-          text(message.charAt(message.length()-((i+counter) %message.length()) -1), 
-          sin((float)(message.length()-i -1)/(float)message.length()* pathLength)*sinMultiplyer
+          text(message.charAt((int)letters-((i+counter) %(int)letters) -1), 
+          sin((float)(letters-i -1)/(float)message.length()* pathLength)*sinMultiplyer
           ,pathLength - (float)(message.length()-i -1)/(float)message.length()* pathLength);
         }else {
-          text(message.charAt(message.length()-((i+counter) %message.length()) -1),
-          sin(((float)(message.length()-i -1)/(float)message.length())* pathLength)*sinMultiplyer,
-          1 - ((float)(message.length()-i -1)/(float)message.length())* pathLength);
+          text(message.charAt((int)letters-((i+counter) %(int)letters) -1),
+          sin((letters-i -1)/letters* pathLength)*sinMultiplyer,
+          1 - ((letters-i -1)/letters)* pathLength);
         }
       }
     }
     
-    if (timeToLive + 5 >= message.length())  {
+    if (timeToLive + 1 >= message.length())  {
       growing = false;
     }
     
-    if (growing) timeToLive += 15;
-    else timeToLive -=15;
+    if (growing) timeToLive += 1;
+    else timeToLive -=1;
     
     popMatrix();
   }
@@ -84,8 +86,8 @@ public class Path {
     Blob blob = getBlob(blobIndex);
     if (blob == null){
       if (x == 0 || y == 0){
-        x = random(0, width);
-        y = random(0, height);
+        x = random(0, sizeX);
+        y = random(0, sizeY);
       }
     }else {
       x = (float)blob.getBoundingBox().getX() + blob.getBoundingBox().width/2;

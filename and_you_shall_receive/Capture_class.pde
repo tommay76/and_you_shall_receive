@@ -25,7 +25,7 @@ class DCapture implements java.beans.PropertyChangeListener {
   }
 
   public PImage updateImage() {
-    PImage img = createImage(width, height, RGB);
+    PImage img = createImage(width, height, ALPHA  );
     BufferedImage bimg = capture.getImage();
     bimg.getRGB(0, 0, img.width, img.height, img.pixels, 0, img.width);
     img.updatePixels();
