@@ -1,11 +1,14 @@
 # ADAD3400
-
+The following works are written in Java for the software Sketchbook [Processing](https://processing.org/)
 ###FINAL WORK###
 
-and_you_shall_receive:
+#and_you_shall_receive:
 
-My main work, I built it for a windows platform, but I did attempt to also write a version for Mac users as well.
-To get it working on windows or mac, you'll need to download wireshark, which can be done simply online or through the terminal.
+This work is a multithreaded visualisation of local internet traffic that is captured from a local machine. The work aims to shed light on the 
+sheer amount of data that is constantly being transferred invisibly and to some, unknowingly every second of the day.
+
+I built this on a Windows OS, but I did attempt to also write a version for Mac users as well.
+To get it working on windows or mac, you'll need to download Processing, as well as wireshark, which can be done simply online or through the terminal.
 
 
 
